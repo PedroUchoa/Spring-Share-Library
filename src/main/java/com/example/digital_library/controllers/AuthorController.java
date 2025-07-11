@@ -5,6 +5,7 @@ import com.example.digital_library.dtos.CreateAuthorDto;
 import com.example.digital_library.dtos.ReturnAuthorDto;
 import com.example.digital_library.dtos.ReturnBookDto;
 import com.example.digital_library.services.AuthorService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +27,7 @@ public class AuthorController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<ReturnAuthorDto> createAuthor(@RequestBody CreateAuthorDto author, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<ReturnAuthorDto> createAuthor(@RequestBody @Valid CreateAuthorDto author, UriComponentsBuilder uriBuilder){
         ReturnAuthorDto authorReturn = authorService.createAuthor(author);
         URI location = uriBuilder
                 .path("/{id}")
@@ -55,7 +56,7 @@ public class AuthorController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<ReturnAuthorDto> updateAuthor(@RequestBody CreateAuthorDto updateAuthor, @PathVariable Long id){
+    public ResponseEntity<ReturnAuthorDto> updateAuthor(@RequestBody @Valid CreateAuthorDto updateAuthor, @PathVariable Long id){
         ReturnAuthorDto authorReturn = authorService.updateAuthor(updateAuthor,id);
         return ResponseEntity.ok(authorReturn);
     }

@@ -3,6 +3,7 @@ package com.example.digital_library.controllers;
 import com.example.digital_library.dtos.CreateBookDto;
 import com.example.digital_library.dtos.ReturnBookDto;
 import com.example.digital_library.services.BookService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +24,7 @@ public class BookController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<ReturnBookDto> createBook(@RequestBody CreateBookDto createBookDto, UriComponentsBuilder componentsBuilder){
+    public ResponseEntity<ReturnBookDto> createBook(@RequestBody @Valid CreateBookDto createBookDto, UriComponentsBuilder componentsBuilder){
         ReturnBookDto bookReturn = bookService.createBook(createBookDto);
         URI location = componentsBuilder.path("/{id}")
                 .buildAndExpand(bookReturn.id())
@@ -51,7 +52,7 @@ public class BookController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<ReturnBookDto> updateBook(@RequestBody CreateBookDto updateBook, @PathVariable Long id){
+    public ResponseEntity<ReturnBookDto> updateBook(@RequestBody @Valid CreateBookDto updateBook, @PathVariable Long id){
         ReturnBookDto bookReturn = bookService.updateBook(updateBook, id);
         return ResponseEntity.ok(bookReturn);
     }

@@ -4,6 +4,7 @@ import com.example.digital_library.dtos.CreateCategoryDto;
 import com.example.digital_library.dtos.ReturnBookDto;
 import com.example.digital_library.dtos.ReturnCategoryDto;
 import com.example.digital_library.services.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +27,7 @@ public class CategoryController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<ReturnCategoryDto> createCategory(@RequestBody CreateCategoryDto createCategoryDto, UriComponentsBuilder componentsBuilder){
+    public ResponseEntity<ReturnCategoryDto> createCategory(@RequestBody @Valid CreateCategoryDto createCategoryDto, UriComponentsBuilder componentsBuilder){
         ReturnCategoryDto categoryReturn = categoryService.createCategory(createCategoryDto);
         URI location = componentsBuilder
                 .path("/{id}")
