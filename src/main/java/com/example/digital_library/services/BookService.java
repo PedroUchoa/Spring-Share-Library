@@ -30,8 +30,11 @@ public class BookService {
     public ReturnBookDto createBook(CreateBookDto createBookDto){
         Author author = authorRepository.getReferenceById(createBookDto.authorId());
         Category category = categoryRepository.getReferenceById(createBookDto.categoryId());
-
         Book book = bookRepository.save(new Book(createBookDto,author,category));
+        author.getBooks().add(book);
+        category.getBooks().add(book);
+        authorRepository.save(author);
+        categoryRepository.save(category);
         return new ReturnBookDto(book);
     }
 

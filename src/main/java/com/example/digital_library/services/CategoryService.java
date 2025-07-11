@@ -3,7 +3,6 @@ package com.example.digital_library.services;
 import com.example.digital_library.dtos.CreateCategoryDto;
 import com.example.digital_library.dtos.ReturnBookDto;
 import com.example.digital_library.dtos.ReturnCategoryDto;
-import com.example.digital_library.models.Book;
 import com.example.digital_library.models.Category;
 import com.example.digital_library.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;

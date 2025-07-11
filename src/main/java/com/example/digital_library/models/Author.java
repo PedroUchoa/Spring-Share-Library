@@ -1,6 +1,9 @@
 package com.example.digital_library.models;
 
 import com.example.digital_library.dtos.CreateAuthorDto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -8,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "tb_authors")
 public class Author {
@@ -18,7 +22,8 @@ public class Author {
     private String name;
     private String email;
     private LocalDate birthDay;
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Book> books = new ArrayList<>();
 
     public Author() {
