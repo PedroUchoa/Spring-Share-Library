@@ -1,5 +1,6 @@
 package com.example.digital_library.dtos;
 
+import com.example.digital_library.infra.customValidation.ValidDateFormat;
 import com.example.digital_library.models.Author;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -16,6 +17,7 @@ public record CreateAuthorDto(
         String email,
         @NotNull(message = "BirthDay Can't be Null")
         @PastOrPresent(message = "The Birth Day cannot be in the future")
+        @ValidDateFormat(pattern = "dd/MM/yyyy", message = "Date must be in dd/MM/yyyy format")
         LocalDate birthDay){
 
     public CreateAuthorDto(Author author) {

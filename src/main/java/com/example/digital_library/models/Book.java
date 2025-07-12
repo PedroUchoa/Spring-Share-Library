@@ -19,6 +19,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    @Column(unique = true)
     private String isbn;
     private Integer publicationYear;
     private BigDecimal price;
@@ -49,6 +50,15 @@ public class Book {
         this.isbn = createBookDto.isbn();
         this.publicationYear = createBookDto.publicationYear();
         this.price = createBookDto.price();
+        this.author = author;
+        this.category = category;
+    }
+
+    public Book(String title, BigDecimal price, Integer yearPublication,String isbn,Author author, Category category) {
+        this.title = title;
+        this.price = price;
+        this.publicationYear = yearPublication;
+        this.isbn = isbn;
         this.author = author;
         this.category = category;
     }

@@ -1,6 +1,7 @@
 package com.example.digital_library.controllers;
 
 import com.example.digital_library.dtos.CreateBookDto;
+import com.example.digital_library.dtos.ImportBookDto;
 import com.example.digital_library.dtos.ReturnBookDto;
 import com.example.digital_library.services.BookService;
 import jakarta.validation.Valid;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.IOException;
 import java.net.URI;
 
 @RestController
@@ -30,6 +32,13 @@ public class BookController {
                 .buildAndExpand(bookReturn.id())
                 .toUri();
         return ResponseEntity.created(location).body(bookReturn);
+    }
+
+    @PostMapping("/importar")
+    @Transactional
+    public ResponseEntity<ReturnBookDto> importBook(@RequestBody ImportBookDto importBookDto) throws IOException {
+        ReturnBookDto book = bookService.importBook(importBookDto);
+        return ResponseEntity.ok(book);
     }
 
     @GetMapping

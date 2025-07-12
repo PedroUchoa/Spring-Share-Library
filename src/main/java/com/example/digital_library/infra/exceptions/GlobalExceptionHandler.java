@@ -44,5 +44,17 @@ public class GlobalExceptionHandler{
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(threatResponse);
     }
 
+    @ExceptionHandler(IsbnDuplicatedException.class)
+    public ResponseEntity<ErrorMessage> handleIsbnDuplicatedException(Exception ex){
+        ErrorMessage threatResponse = new ErrorMessage(HttpStatus.CONFLICT,ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(threatResponse);
+    }
+
+    @ExceptionHandler(UrlProblemException.class)
+    public ResponseEntity<ErrorMessage> handleUrlProblemException(Exception ex){
+        ErrorMessage threatResponse = new ErrorMessage(HttpStatus.BAD_REQUEST,ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(threatResponse);
+    }
+
 
 }
