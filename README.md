@@ -1,4 +1,4 @@
-<h1 align="center"> Gerenciador de Gastos API </h1>
+<h1 align="center"> Gerenciador de Livros API </h1>
 
 # Resumo do projeto
 O serviço é um organizador de livros, ele utiliza banco H2 como database para salvar Livros, Categorias e Autores. Como usuário, você poderá salvar Livros e vincular a eles seu autor e categoria, também é possível ver o todos os livros, e retornar eles por autores ou categorias a qual fazem parte. Ao utilizar a aplicação, você poderá checar as rotas com a documentação gerada pelo Springdoc. (Mais informações na área de utilização).
